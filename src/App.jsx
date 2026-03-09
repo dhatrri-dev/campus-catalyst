@@ -32,9 +32,21 @@ const I = {
     MapPin: () => <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>,
     Calendar: () => <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>,
     Heart: () => <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg>,
+    UserCircle: () => <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="10" r="3" /><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" /></svg>,
+    Edit2: () => <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" /></svg>,
+    Camera: () => <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" /><circle cx="12" cy="13" r="4" /></svg>,
+    Bell: () => <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg>,
+    Timetable: () => <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /><line x1="8" y1="14" x2="8" y2="14" strokeWidth="3" strokeLinecap="round" /><line x1="12" y1="14" x2="12" y2="14" strokeWidth="3" strokeLinecap="round" /><line x1="16" y1="14" x2="16" y2="14" strokeWidth="3" strokeLinecap="round" /><line x1="8" y1="18" x2="8" y2="18" strokeWidth="3" strokeLinecap="round" /><line x1="12" y1="18" x2="12" y2="18" strokeWidth="3" strokeLinecap="round" /></svg>,
+    Plus: () => <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>,
+    X: () => <svg width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>,
+    ShoppingBag: () => <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" /><line x1="3" y1="6" x2="21" y2="6" /><path d="M16 10a4 4 0 0 1-8 0" /></svg>,
 };
 
 const TAG_COLORS = { "Exam Prep": "#6366f1", "Cheat Sheets": "#ec4899", "Summary": "#f59e0b", "Mind Maps": "#10b981" };
+const COURSES = { "B.Tech": 8, "M.Tech": 4, "MBA": 4, "BCA": 6, "MCA": 4, "B.Sc": 6, "M.Sc": 4, "B.Com": 6, "B.Arch": 10, "Other": 8 };
+const TT_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+const TT_TIMES = ["8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
+const TT_COLORS = ["#6366f1", "#ec4899", "#f59e0b", "#10b981", "#3b82f6", "#a855f7", "#ef4444", "#14b8a6"];
 const TASKS = [
     { id: 1, title: "Fee Payment Reminder", status: "active", runs: 1240, type: "Email", lastRun: "2h ago", desc: "Auto-reminds students 7 days before due date", progress: 78 },
     { id: 2, title: "Attendance Report Generator", status: "active", runs: 380, type: "Report", lastRun: "1d ago", desc: "Generates weekly attendance PDFs for faculty", progress: 92 },
@@ -161,6 +173,10 @@ function Navbar({ page, setPage, user, onLogout, theme, toggleTheme }) {
         ...(!isAdmin ? [{ id: "roommate", label: "Roommate Match", icon: <I.Roommate /> }] : []),
         ...(!isAdmin ? [{ id: "mess", label: "Mess Menu", icon: <I.Utensils /> }] : []),
         ...(!isAdmin ? [{ id: "lostfound", label: "Lost & Found", icon: <I.MapPin /> }] : []),
+        ...(!isAdmin ? [{ id: "marketplace", label: "Marketplace", icon: <I.ShoppingBag /> }] : []),
+        ...(!isAdmin ? [{ id: "timetable", label: "Timetable", icon: <I.Timetable /> }] : []),
+        ...(!isAdmin ? [{ id: "profile", label: "My Profile", icon: <I.UserCircle /> }] : []),
+        { id: "notices", label: "Notice Board", icon: <I.Bell /> },
         { id: "events", label: "Events", icon: <I.Calendar /> },
         ...(isAdmin ? [{ id: "admin", label: "Admin Tasks", icon: <I.Admin /> }] : []),
     ];
@@ -218,9 +234,12 @@ function Navbar({ page, setPage, user, onLogout, theme, toggleTheme }) {
                             </div>
                         )}
 
-                        {/* Joined date */}
+                        {/*Joined date */}
                         {joinedDate && <div style={{ fontSize: 11, color: "var(--muted)", marginBottom: 14, display: "flex", alignItems: "center", gap: 5 }}>🗓️ Joined {joinedDate}</div>}
 
+                        {!isAdmin && (
+                            <button className="user-menu-btn" style={{ width: "100%", marginBottom: 6 }} onClick={() => { setPage("profile"); setShowMenu(false); }}><I.UserCircle /> My Profile</button>
+                        )}
 
                         {/* Sign Out */}
                         <button className="user-menu-btn" style={{ width: "100%", marginTop: 4 }} onClick={() => { onLogout(); setShowMenu(false); }}><I.LogOut /> Sign Out</button>
@@ -948,10 +967,8 @@ function AdminPage({ user }) {
     const [allProfiles, setAllProfiles] = useState([]);
     const [deleting, setDeleting] = useState(null);
     const [announce, setAnnounce] = useState("");
-    const [announcements, setAnnouncements] = useState([
-        { id: 1, text: "Mid-semester exams start from March 10. Library timing extended till 11PM.", time: "2h ago", author: "Admin" },
-        { id: 2, text: "Campus WiFi maintenance scheduled this Sunday 2AM–5AM. Plan accordingly.", time: "1d ago", author: "Admin" },
-    ]);
+    const [announcements, setAnnouncements] = useState([]);
+    const [savingAnnounce, setSavingAnnounce] = useState(false);
     const [newTaskForm, setNewTaskForm] = useState({ name: "", type: "Email", desc: "" });
 
     useEffect(() => {
@@ -959,7 +976,13 @@ function AdminPage({ user }) {
         fetchLiveStats();
         fetchAllNotes();
         fetchAllProfiles();
+        fetchAnnouncements();
     }, []);
+
+    const fetchAnnouncements = async () => {
+        const { data } = await supabase.from("campus_announcements").select("*").order("created_at", { ascending: false });
+        if (data) setAnnouncements(data);
+    };
 
     const fetchLiveStats = async () => {
         const [{ count: notesCount }, { count: profilesCount }] = await Promise.all([
@@ -987,10 +1010,23 @@ function AdminPage({ user }) {
         setDeleting(null);
     };
 
-    const postAnnouncement = () => {
+    const postAnnouncement = async () => {
         if (!announce.trim()) return;
-        setAnnouncements(a => [{ id: Date.now(), text: announce.trim(), time: "Just now", author: "Admin" }, ...a]);
-        setAnnounce("");
+        setSavingAnnounce(true);
+        const { data, error } = await supabase.from("campus_announcements").insert({
+            text: announce.trim(),
+            author: "Admin"
+        }).select();
+        setSavingAnnounce(false);
+        if (!error && data) {
+            setAnnouncements(a => [data[0], ...a]);
+            setAnnounce("");
+        }
+    };
+
+    const deleteAnnouncement = async (id) => {
+        setAnnouncements(a => a.filter(x => x.id !== id));
+        await supabase.from("campus_announcements").delete().eq("id", id);
     };
 
     const toggle = id => setTasks(ts => ts.map(t => t.id === id ? { ...t, status: t.status === "active" ? "paused" : "active" } : t));
@@ -1235,9 +1271,9 @@ function AdminPage({ user }) {
                                 <div style={{ fontSize: 28, lineHeight: 1 }}>📢</div>
                                 <div style={{ flex: 1 }}>
                                     <div style={{ fontSize: 14, color: "var(--text)", marginBottom: 8, lineHeight: 1.5 }}>{a.text}</div>
-                                    <div style={{ fontSize: 12, color: "var(--muted2)" }}>Posted by <b>{a.author}</b> · {a.time}</div>
+                                    <div style={{ fontSize: 12, color: "var(--muted2)" }}>Posted by <b>{a.author}</b> · {new Date(a.created_at).toLocaleString("en-IN", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}</div>
                                 </div>
-                                <button onClick={() => setAnnouncements(an => an.filter(x => x.id !== a.id))} style={{ background: "none", border: "none", color: "var(--muted2)", cursor: "pointer", fontSize: 18, padding: 4 }}>✕</button>
+                                <button onClick={() => deleteAnnouncement(a.id)} style={{ background: "none", border: "none", color: "var(--muted2)", cursor: "pointer", fontSize: 18, padding: 4 }}>✕</button>
                             </div>
                         ))}
                     </div>
@@ -1815,6 +1851,618 @@ function EventsPage({ user }) {
     );
 }
 
+// PROFILE PAGE
+const AVATAR_OPTIONS = ["🎓", "🦁", "🐼", "🦊", "🐻", "🐯", "🦋", "🌟", "🔥", "💎", "🚀", "🎯", "🎸", "🍀", "🌙", "⚡", "🏆", "🎨", "🌊", "🦅"];
+const DEPARTMENTS = ["Computer Science", "Information Technology", "Electronics & Communication", "Mechanical", "Civil", "Electrical", "Biotechnology", "Business Administration", "Other"];
+const YEARS = ["1st Year", "2nd Year", "3rd Year", "4th Year", "Postgraduate"];
+
+function ProfilePage({ user }) {
+    const LS_KEY = `cc_profile_${user.id}`;
+    const loadLocal = () => { try { return JSON.parse(localStorage.getItem(LS_KEY) || "{}"); } catch { return {}; } };
+
+    const initProfile = () => {
+        const local = loadLocal();
+        return {
+            display_name: local.display_name || user.user_metadata?.full_name || user.email.split("@")[0],
+            bio: local.bio || "",
+            avatar: local.avatar || "🎓",
+            department: local.department || "",
+            year: local.year || "",
+        };
+    };
+
+    const [profile, setProfile] = useState(initProfile);
+    const [editing, setEditing] = useState(false);
+    const [saving, setSaving] = useState(false);
+    const [msg, setMsg] = useState("");
+    const [stats, setStats] = useState({ notes: 0, likes: 0 });
+    const [mounted, setMounted] = useState(false);
+    const [showAvatarPicker, setShowAvatarPicker] = useState(false);
+
+    useEffect(() => {
+        setTimeout(() => setMounted(true), 50);
+        fetchProfile();
+        fetchStats();
+    }, []);
+
+    const fetchProfile = async () => {
+        const local = loadLocal();
+        const { data } = await supabase.from("profiles").select("id,full_name,year,major").eq("id", user.id).single();
+        if (data) {
+            setProfile(p => ({
+                ...p,
+                display_name: local.display_name || data.full_name || user.user_metadata?.full_name || user.email.split("@")[0],
+                department: local.department || data.major || "",
+                year: local.year || data.year || "",
+            }));
+        }
+    };
+
+    const fetchStats = async () => {
+        const [{ count: notesCount }, { count: likesCount }] = await Promise.all([
+            supabase.from("notes").select("*", { count: "exact", head: true }).eq("author_id", user.id),
+            supabase.from("note_likes").select("*", { count: "exact", head: true }).eq("user_id", user.id),
+        ]);
+        setStats({ notes: notesCount || 0, likes: likesCount || 0 });
+    };
+
+    const saveProfile = async () => {
+        if (!profile.display_name.trim()) return setMsg("Display name can't be empty.");
+        setSaving(true); setMsg("");
+        localStorage.setItem(LS_KEY, JSON.stringify({
+            display_name: profile.display_name,
+            bio: profile.bio,
+            avatar: profile.avatar,
+            department: profile.department,
+            year: profile.year,
+        }));
+        const { error } = await supabase.from("profiles").upsert({
+            id: user.id,
+            full_name: profile.display_name,
+            year: profile.year,
+            major: profile.department,
+        });
+        setSaving(false);
+        if (error) { setMsg("❌ " + error.message); }
+        else { setMsg("✅ Profile saved!"); setEditing(false); setTimeout(() => setMsg(""), 3000); }
+    };
+
+    const joinedDate = user?.created_at ? new Date(user.created_at).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" }) : "—";
+
+    return (
+        <div className="page profile-page">
+            <div className={`profile-hero ${mounted ? "animate-in" : ""}`}>
+                <div className="profile-hero-bg" />
+                <div className="profile-avatar-wrap">
+                    <div className="profile-avatar-emoji">{profile.avatar}</div>
+                    {editing && (
+                        <button className="profile-avatar-edit-btn" onClick={() => setShowAvatarPicker(s => !s)}>
+                            <I.Camera /> Change
+                        </button>
+                    )}
+                </div>
+                <div className="profile-hero-info">
+                    <div className="profile-hero-name">{profile.display_name}</div>
+                    <div className="profile-hero-email">{user.email}</div>
+                    <div className="profile-hero-badges">
+                        <span className="profile-badge">🎓 Student</span>
+                        {profile.year && <span className="profile-badge">{profile.year}</span>}
+                        {profile.department && <span className="profile-badge">{profile.department}</span>}
+                    </div>
+                </div>
+                <button className="profile-edit-btn" onClick={() => { setEditing(e => !e); setShowAvatarPicker(false); }}>
+                    {editing ? "✕ Cancel" : <><I.Edit2 /> Edit Profile</>}
+                </button>
+            </div>
+
+            {showAvatarPicker && editing && (
+                <div className="avatar-picker-inline animate-slide-down">
+                    <div className="avatar-picker-title">🎨 Pick your avatar</div>
+                    <div className="avatar-grid">
+                        {AVATAR_OPTIONS.map(e => (
+                            <button key={e} className={`avatar-opt ${profile.avatar === e ? "selected" : ""}`}
+                                onClick={() => { setProfile(p => ({ ...p, avatar: e })); setShowAvatarPicker(false); }}>
+                                {e}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            <div className={`profile-stats-row ${mounted ? "animate-in" : ""}`} style={{ animationDelay: "0.1s" }}>
+                {[
+                    { icon: "📒", val: stats.notes, label: "Notes Uploaded" },
+                    { icon: "❤️", val: stats.likes, label: "Notes Liked" },
+                    { icon: "🗓️", val: joinedDate, label: "Member Since", raw: true },
+                ].map(s => (
+                    <div key={s.label} className="profile-stat-chip">
+                        <div className="profile-stat-icon">{s.icon}</div>
+                        <div className="profile-stat-val">{s.raw ? s.val : s.val.toLocaleString()}</div>
+                        <div className="profile-stat-label">{s.label}</div>
+                    </div>
+                ))}
+            </div>
+
+            <div className={`profile-form-card ${mounted ? "animate-in" : ""}`} style={{ animationDelay: "0.15s" }}>
+                <div className="profile-form-header">
+                    <span className="page-eyebrow">About Me</span>
+                </div>
+                <div className="profile-field-row">
+                    <div className="profile-field">
+                        <label className="profile-label">Display Name</label>
+                        {editing
+                            ? <input className="inp" value={profile.display_name} onChange={e => setProfile(p => ({ ...p, display_name: e.target.value }))} placeholder="Your name" />
+                            : <div className="profile-value">{profile.display_name || "—"}</div>
+                        }
+                    </div>
+                    <div className="profile-field">
+                        <label className="profile-label">Email</label>
+                        <div className="profile-value" style={{ opacity: 0.7 }}>{user.email}</div>
+                    </div>
+                </div>
+                <div className="profile-field" style={{ marginTop: 16 }}>
+                    <label className="profile-label">Bio</label>
+                    {editing
+                        ? <textarea className="inp profile-bio-inp" value={profile.bio} onChange={e => setProfile(p => ({ ...p, bio: e.target.value }))} placeholder="Tell your campus what you're about... 🎯" rows={3} />
+                        : <div className="profile-value">{profile.bio || <span style={{ opacity: 0.45 }}>No bio yet — click Edit to add one!</span>}</div>
+                    }
+                </div>
+                <div className="profile-field-row" style={{ marginTop: 16 }}>
+                    <div className="profile-field">
+                        <label className="profile-label">Department</label>
+                        {editing
+                            ? <select className="inp" value={profile.department} onChange={e => setProfile(p => ({ ...p, department: e.target.value }))}>
+                                <option value="">Select department</option>
+                                {DEPARTMENTS.map(d => <option key={d}>{d}</option>)}
+                            </select>
+                            : <div className="profile-value">{profile.department || "—"}</div>
+                        }
+                    </div>
+                    <div className="profile-field">
+                        <label className="profile-label">Year of Study</label>
+                        {editing
+                            ? <select className="inp" value={profile.year} onChange={e => setProfile(p => ({ ...p, year: e.target.value }))}>
+                                <option value="">Select year</option>
+                                {YEARS.map(y => <option key={y}>{y}</option>)}
+                            </select>
+                            : <div className="profile-value">{profile.year || "—"}</div>
+                        }
+                    </div>
+                </div>
+                {msg && <div className={msg.startsWith("✅") ? "auth-success" : "auth-error"} style={{ marginTop: 16 }}>{msg}</div>}
+                {editing && (
+                    <div style={{ display: "flex", gap: 10, marginTop: 20 }}>
+                        <button className={`btn-glow sm ${saving ? "loading" : ""}`} onClick={saveProfile} disabled={saving}>
+                            {saving ? <span className="spinner" /> : "💾 Save Changes"}
+                        </button>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+}
+
+// NOTICE BOARD (STUDENT VIEW)
+function NoticeBoard({ user }) {
+    const [notices, setNotices] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setTimeout(() => setMounted(true), 50);
+        fetchNotices();
+    }, []);
+
+    const fetchNotices = async () => {
+        const { data } = await supabase.from("campus_announcements").select("*").order("created_at", { ascending: false });
+        if (data) setNotices(data);
+        setLoading(false);
+    };
+
+    return (
+        <div className="page">
+            <div className={`page-header ${mounted ? "animate-in" : ""}`}>
+                <div>
+                    <div className="page-eyebrow">Announcements</div>
+                    <h2 className="page-title">Notice <span className="title-accent">Board</span></h2>
+                    <p className="page-sub">Official updates and campus-wide notifications</p>
+                </div>
+                <div className="notice-header-icon">📢</div>
+            </div>
+
+            {loading ? (
+                <div style={{ padding: "40px", textAlign: "center", color: "var(--muted2)" }}>
+                    <span className="spinner" style={{ marginBottom: 12 }} />
+                    <p>Fetching latest updates...</p>
+                </div>
+            ) : notices.length === 0 ? (
+                <div className="empty-state">
+                    <div className="empty-icon">📭</div>
+                    <p>No announcements yet. Check back soon!</p>
+                </div>
+            ) : (
+                <div className="notice-board">
+                    {notices.map((n, i) => (
+                        <div key={n.id} className={`notice-card ${mounted ? "animate-in" : ""}`} style={{ animationDelay: `${i * 0.08}s` }}>
+                            <div className="notice-card-glow" />
+                            <div className="notice-card-header">
+                                <div className="notice-badge">OFFICIAL</div>
+                                <span className="notice-time">{new Date(n.created_at).toLocaleDateString("en-IN", { day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" })}</span>
+                            </div>
+                            <div className="notice-card-body">
+                                {n.text}
+                            </div>
+                            <div className="notice-card-footer">
+                                <div className="notice-author">
+                                    <div className="author-avatar">A</div>
+                                    <span>Posted by Campus Admin</span>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+}
+
+// ─── TIMETABLE TRACKER ────────────────────────────────────────────────────────
+function TimetablePage({ user }) {
+    const [step, setStep] = useState("loading"); // loading | setup | grid
+    const [course, setCourse] = useState("");
+    const [semester, setSemester] = useState(1);
+    const [slots, setSlots] = useState([]);
+    const [saving, setSaving] = useState(false);
+    const [msg, setMsg] = useState("");
+    const [mounted, setMounted] = useState(false);
+    // Modal state
+    const [modal, setModal] = useState(null); // { day, time } | null
+    const [form, setForm] = useState({ subject: "", faculty: "", room: "", endTime: "" });
+    const [addingSlot, setAddingSlot] = useState(false);
+
+    useEffect(() => { setTimeout(() => setMounted(true), 50); loadSettings(); }, []);
+
+    const loadSettings = async () => {
+        const { data } = await supabase.from("timetable_settings").select("*").eq("user_id", user.id).single();
+        if (data) {
+            setCourse(data.course);
+            setSemester(data.semester);
+            await fetchSlots(data.course, data.semester);
+            setStep("grid");
+        } else {
+            setStep("setup");
+        }
+    };
+
+    const fetchSlots = async (c, s) => {
+        const { data } = await supabase.from("timetable_slots").select("*")
+            .eq("user_id", user.id).eq("course", c).eq("semester", s);
+        if (data) setSlots(data);
+    };
+
+    const saveSetup = async () => {
+        if (!course) return setMsg("Please select a course.");
+        setSaving(true); setMsg("");
+        await supabase.from("timetable_settings").upsert({ user_id: user.id, course, semester }, { onConflict: "user_id" });
+        await fetchSlots(course, semester);
+        setSaving(false);
+        setStep("grid");
+    };
+
+    const openModal = (day, time) => {
+        // Check if slot already exists
+        const existing = slots.find(s => s.day === day && s.start_time === time);
+        if (existing) return; // slot taken
+        const idx = TT_TIMES.indexOf(time);
+        const endTime = TT_TIMES[idx + 1] || time;
+        setForm({ subject: "", faculty: "", room: "", endTime });
+        setModal({ day, time });
+    };
+
+    const addSlot = async () => {
+        if (!form.subject.trim()) return;
+        setAddingSlot(true);
+        const color = TT_COLORS[slots.length % TT_COLORS.length];
+        const { data, error } = await supabase.from("timetable_slots").insert({
+            user_id: user.id, day: modal.day, start_time: modal.time,
+            end_time: form.endTime, subject: form.subject.trim(),
+            faculty: form.faculty.trim(), room: form.room.trim(),
+            course, semester, color
+        }).select().single();
+        if (!error && data) {
+            setSlots(s => [...s, data]);
+        }
+        setModal(null);
+        setAddingSlot(false);
+    };
+
+    const deleteSlot = async (id, e) => {
+        e.stopPropagation();
+        setSlots(s => s.filter(x => x.id !== id));
+        await supabase.from("timetable_slots").delete().eq("id", id);
+    };
+
+    const getSlot = (day, time) => slots.find(s => s.day === day && s.start_time === time);
+    const semCount = COURSES[course] || 8;
+
+    if (step === "loading") return (
+        <div className="page"><div className="empty-state"><div className="empty-icon">⏳</div><p>Loading your timetable...</p></div></div>
+    );
+
+    return (
+        <div className="page">
+            <div className={`page-header ${mounted ? "animate-in" : ""}`}>
+                <div>
+                    <div className="page-eyebrow">Schedule</div>
+                    <h2 className="page-title">My <span className="title-accent">Timetable</span></h2>
+                    <p className="page-sub">
+                        {step === "grid" ? <>{course} · Semester {semester} · <button className="switch-link" onClick={() => setStep("setup")} style={{ fontSize: 13 }}>Change</button></> : "Set up your weekly class schedule"}
+                    </p>
+                </div>
+                {step === "grid" && (
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, background: "var(--bg3)", border: "1px solid var(--border)", borderRadius: 12, padding: "8px 14px", fontSize: 13, color: "var(--muted2)" }}>
+                        <I.Timetable /> {slots.length} class{slots.length !== 1 ? "es" : ""} added
+                    </div>
+                )}
+            </div>
+
+            {/* ── SETUP STEP ── */}
+            {step === "setup" && (
+                <div className={`pref-form ${mounted ? "animate-in" : ""}`}>
+                    <div className="pref-form-inner">
+                        <div className="pref-section">
+                            <div className="pref-label">🎓 Your Course</div>
+                            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))", gap: 8, marginTop: 8 }}>
+                                {Object.keys(COURSES).map(c => (
+                                    <button key={c} className={`option-chip ${course === c ? "active" : ""}`}
+                                        onClick={() => { setCourse(c); setSemester(1); }}>
+                                        {c}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {course && (
+                            <div className="pref-section" style={{ marginTop: 24 }}>
+                                <div className="pref-label">📅 Current Semester <span style={{ color: "var(--muted2)", fontWeight: 400, fontSize: 12 }}>({COURSES[course]} total)</span></div>
+                                <div className="option-row" style={{ flexWrap: "wrap", gap: 8, marginTop: 8 }}>
+                                    {Array.from({ length: COURSES[course] }, (_, i) => i + 1).map(s => (
+                                        <button key={s} className={`option-chip ${semester === s ? "active" : ""}`}
+                                            onClick={() => setSemester(s)}>
+                                            Sem {s}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {msg && <div className="auth-error" style={{ marginTop: 16 }}>{msg}</div>}
+                        <button className={`btn-glow full ${saving ? "loading" : ""}`} style={{ marginTop: 28 }}
+                            onClick={saveSetup} disabled={saving}>
+                            {saving ? <span className="spinner" /> : "Continue to Timetable ✨"}
+                        </button>
+                    </div>
+                </div>
+            )}
+
+            {/* ── GRID STEP ── */}
+            {step === "grid" && (
+                <div className={`tt-scroll-wrap ${mounted ? "animate-in" : ""}`}>
+                    <div className="tt-grid">
+                        {/* Header row */}
+                        <div className="tt-time-header" />
+                        {TT_DAYS.map(d => (
+                            <div key={d} className="tt-day-header">{d.slice(0, 3)}</div>
+                        ))}
+
+                        {/* Time rows */}
+                        {TT_TIMES.map((time, ti) => (
+                            <>
+                                <div key={`t-${time}`} className="tt-time-label">{time}</div>
+                                {TT_DAYS.map(day => {
+                                    const slot = getSlot(day, time);
+                                    return (
+                                        <div key={`${day}-${time}`} className="tt-cell"
+                                            onClick={() => !slot && openModal(day, time)}>
+                                            {slot ? (
+                                                <div className="tt-slot" style={{ background: `${slot.color}18`, border: `1.5px solid ${slot.color}55`, borderLeft: `3px solid ${slot.color}` }}>
+                                                    <button className="tt-delete-btn" onClick={e => deleteSlot(slot.id, e)}><I.X /></button>
+                                                    <div className="tt-slot-subject" style={{ color: slot.color }}>{slot.subject}</div>
+                                                    {slot.faculty && <div className="tt-slot-meta">👤 {slot.faculty}</div>}
+                                                    {slot.room && <div className="tt-slot-meta">📍 {slot.room}</div>}
+                                                    <div className="tt-slot-time">{slot.start_time} – {slot.end_time}</div>
+                                                </div>
+                                            ) : (
+                                                <button className="tt-add-btn"><I.Plus /></button>
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </>
+                        ))}
+                    </div>
+
+                    <div style={{ marginTop: 16, fontSize: 12, color: "var(--muted2)", textAlign: "center" }}>
+                        💡 Click any empty cell to add a class · Click ✕ on a slot to remove it
+                    </div>
+                </div>
+            )}
+
+            {/* ── ADD SLOT MODAL ── */}
+            {modal && (
+                <div className="tt-modal-overlay" onClick={() => setModal(null)}>
+                    <div className="tt-modal animate-slide-up" onClick={e => e.stopPropagation()}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18 }}>
+                            <h3 style={{ fontSize: 16, fontWeight: 700 }}>📚 Add Class</h3>
+                            <button onClick={() => setModal(null)} style={{ background: "none", border: "none", color: "var(--muted2)", cursor: "pointer", fontSize: 18 }}>✕</button>
+                        </div>
+                        <div style={{ fontSize: 12, color: "var(--muted2)", marginBottom: 16, display: "flex", gap: 12 }}>
+                            <span>📅 {modal.day}</span>
+                            <span>🕐 {modal.time} – {form.endTime}</span>
+                        </div>
+
+                        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                            <input className="inp" placeholder="Subject name *" value={form.subject}
+                                onChange={e => setForm(f => ({ ...f, subject: e.target.value }))} autoFocus />
+                            <input className="inp" placeholder="Faculty / Professor (optional)" value={form.faculty}
+                                onChange={e => setForm(f => ({ ...f, faculty: e.target.value }))} />
+                            <div style={{ display: "flex", gap: 10 }}>
+                                <input className="inp" placeholder="Room / Hall (optional)" value={form.room}
+                                    onChange={e => setForm(f => ({ ...f, room: e.target.value }))} style={{ flex: 1 }} />
+                                <select className="inp" value={form.endTime} onChange={e => setForm(f => ({ ...f, endTime: e.target.value }))} style={{ flex: 0, minWidth: 90 }}>
+                                    {TT_TIMES.filter(t => t > modal.time).map(t => <option key={t}>{t}</option>)}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style={{ display: "flex", gap: 10, marginTop: 18 }}>
+                            <button className={`btn-glow sm ${addingSlot ? "loading" : ""}`} onClick={addSlot}
+                                disabled={addingSlot || !form.subject.trim()}>
+                                {addingSlot ? <span className="spinner" /> : "Add Class"}
+                            </button>
+                            <button className="btn-ghost" onClick={() => setModal(null)}>Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+}
+
+// MARKETPLACE / BUY-SELL BOARD
+const MARKET_CATS = ["Textbooks", "Electronics", "Furniture", "Clothing", "Stationery", "Cycles", "Other"];
+const MARKET_CONDITIONS = ["Brand New", "Like New", "Good", "Fair"];
+const MARKET_CAT_EMOJI = { Textbooks: "📚", Electronics: "💻", Furniture: "🪑", Clothing: "👕", Stationery: "✏️", Cycles: "🚲", Other: "📦" };
+const MARKET_CAT_COLOR = { Textbooks: "#6366f1", Electronics: "#ec4899", Furniture: "#f59e0b", Clothing: "#22c55e", Stationery: "#8b5cf6", Cycles: "#14b8a6", Other: "#64748b" };
+
+function MarketplacePage({ user }) {
+    const [items, setItems] = useState([]);
+    const [filter, setFilter] = useState("All");
+    const [search, setSearch] = useState("");
+    const [showForm, setShowForm] = useState(false);
+    const [form, setForm] = useState({ title: "", description: "", price: "", category: "Textbooks", condition: "Good" });
+    const [saving, setSaving] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => { setTimeout(() => setMounted(true), 50); fetchItems(); }, []);
+
+    const fetchItems = async () => {
+        const { data } = await supabase.from("marketplace_items").select("*").order("created_at", { ascending: false });
+        if (data) setItems(data);
+    };
+
+    const postItem = async () => {
+        if (!form.title || !form.price) return;
+        setSaving(true);
+        await supabase.from("marketplace_items").insert({
+            title: form.title, description: form.description, price: parseFloat(form.price),
+            category: form.category, condition: form.condition,
+            user_id: user.id, author_name: user.user_metadata?.full_name || user.email.split("@")[0],
+            author_email: user.email,
+        });
+        setForm({ title: "", description: "", price: "", category: "Textbooks", condition: "Good" });
+        setShowForm(false); setSaving(false); fetchItems();
+    };
+
+    const deleteItem = async (id) => {
+        setItems(it => it.filter(x => x.id !== id));
+        await supabase.from("marketplace_items").delete().eq("id", id);
+    };
+
+    const filtered = items.filter(it => {
+        if (filter !== "All" && it.category !== filter) return false;
+        if (search && !it.title.toLowerCase().includes(search.toLowerCase()) && !(it.description || "").toLowerCase().includes(search.toLowerCase())) return false;
+        return true;
+    });
+
+    return (
+        <div className="page">
+            <div className={`page-header ${mounted ? "animate-in" : ""}`}>
+                <div>
+                    <div className="page-eyebrow">Campus Trade</div>
+                    <h2 className="page-title">Market<span className="title-accent">place</span></h2>
+                    <p className="page-sub">Buy, sell, and trade with fellow students</p>
+                </div>
+                <button className="btn-glow sm" onClick={() => setShowForm(!showForm)}>+ List Item</button>
+            </div>
+
+            {showForm && (
+                <div className="upload-panel animate-slide-down" style={{ marginBottom: 24 }}>
+                    <h3>📦 List an Item for Sale</h3>
+                    <div className="form-row">
+                        <input className="inp" placeholder="Item name" value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} />
+                        <input className="inp" type="number" placeholder="Price (₹)" value={form.price} onChange={e => setForm(f => ({ ...f, price: e.target.value }))} style={{ maxWidth: 140 }} />
+                    </div>
+                    <div className="form-row" style={{ marginTop: 10 }}>
+                        <select className="inp" value={form.category} onChange={e => setForm(f => ({ ...f, category: e.target.value }))}>
+                            {MARKET_CATS.map(c => <option key={c}>{c}</option>)}
+                        </select>
+                        <select className="inp" value={form.condition} onChange={e => setForm(f => ({ ...f, condition: e.target.value }))}>
+                            {MARKET_CONDITIONS.map(c => <option key={c}>{c}</option>)}
+                        </select>
+                    </div>
+                    <textarea className="inp" placeholder="Describe your item (optional)" rows={2} value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} style={{ margin: "10px 0", resize: "vertical" }} />
+                    <div className="upload-actions">
+                        <button className={`btn-glow sm ${saving ? "loading" : ""}`} onClick={postItem} disabled={saving || !form.title || !form.price}>{saving ? <span className="spinner" /> : "Post Item"}</button>
+                        <button className="btn-ghost" onClick={() => setShowForm(false)}>Cancel</button>
+                    </div>
+                </div>
+            )}
+
+            {/* Search + Filters */}
+            <div style={{ display: "flex", gap: 12, marginBottom: 20, flexWrap: "wrap", alignItems: "center" }}>
+                <div style={{ position: "relative", flex: "1 1 200px", maxWidth: 320 }}>
+                    <I.Search />
+                    <input className="inp" placeholder="Search items..." value={search} onChange={e => setSearch(e.target.value)} style={{ paddingLeft: 36 }} />
+                    <div style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "var(--muted2)", pointerEvents: "none" }}><I.Search /></div>
+                </div>
+                <div style={{ display: "flex", gap: 6, overflowX: "auto", flex: "1 1 auto" }}>
+                    {["All", ...MARKET_CATS].map(f => (
+                        <button key={f} className={`tag-pill ${filter === f ? "active" : ""}`} onClick={() => setFilter(f)}>{f === "All" ? "🛒" : MARKET_CAT_EMOJI[f]} {f}</button>
+                    ))}
+                </div>
+            </div>
+
+            {filtered.length === 0 && <div className="empty-state"><div className="empty-icon">🛍️</div><p>{search || filter !== "All" ? "No items match your search." : "No items listed yet — be the first to sell!"}</p></div>}
+
+            <div className="marketplace-grid">
+                {filtered.map((item, i) => {
+                    const color = MARKET_CAT_COLOR[item.category] || "#6366f1";
+                    const isOwner = item.user_id === user.id;
+                    return (
+                        <div key={item.id} className={`marketplace-card ${mounted ? "animate-in" : ""}`} style={{ animationDelay: `${i * 0.07}s` }}>
+                            <div className="marketplace-card-top">
+                                <div className="marketplace-emoji">{MARKET_CAT_EMOJI[item.category] || "📦"}</div>
+                                <div className="marketplace-price">₹{Number(item.price).toLocaleString("en-IN")}</div>
+                            </div>
+                            <div className="marketplace-card-body">
+                                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6 }}>
+                                    <span className="marketplace-cat-badge" style={{ background: `${color}18`, color, border: `1px solid ${color}33` }}>{MARKET_CAT_EMOJI[item.category]} {item.category}</span>
+                                    {isOwner && <button onClick={() => deleteItem(item.id)} style={{ background: "none", border: "none", color: "#ef4444", cursor: "pointer", opacity: 0.6, fontSize: 14 }}>✕</button>}
+                                </div>
+                                <h3 className="marketplace-title">{item.title}</h3>
+                                {item.description && <p className="marketplace-desc">{item.description}</p>}
+                                <div className="marketplace-meta">
+                                    <span className="marketplace-condition" style={{ background: item.condition === "Brand New" ? "#22c55e18" : "var(--bg3)", color: item.condition === "Brand New" ? "#22c55e" : "var(--muted2)" }}>{item.condition}</span>
+                                    <span>by {item.author_name}</span>
+                                    <span>{new Date(item.created_at).toLocaleDateString("en-IN", { day: "numeric", month: "short" })}</span>
+                                </div>
+                            </div>
+                            {!isOwner && (
+                                <a href={`mailto:${item.author_email}?subject=Interested in: ${item.title}&body=Hi! I saw your listing for "${item.title}" (₹${item.price}) on CampusCatalyst Marketplace. Is it still available?`}
+                                    className="marketplace-contact-btn"
+                                    style={{ borderColor: `${color}44`, color }}>
+                                    ✉️ Contact Seller
+                                </a>
+                            )}
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    );
+}
+
 // APP ROOT
 export default function App() {
     const [user, setUser] = useState(null); const [loading, setLoading] = useState(true); const [page, setPage] = useState("home");
@@ -1829,6 +2477,6 @@ export default function App() {
     const go = p => { setPage(p); window.scrollTo({ top: 0, behavior: "smooth" }); };
     if (loading) return <div className="app-loading"><div className="brand-logo" style={{ width: 48, height: 48, borderRadius: 14, background: "linear-gradient(135deg,#5b6ef5,#a855f7)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}><I.Zap /></div><div className="loading-bar"><div className="loading-fill" /></div></div>;
     if (!user) return <AuthPage onAuth={setUser} theme={theme} toggleTheme={toggleTheme} />;
-    const pages = { home: <HomePage setPage={go} user={user} />, notes: <NotesPage user={user} />, roommate: <RoommatePage user={user} />, mess: <MessMenuPage />, lostfound: <LostFoundPage user={user} />, events: <EventsPage user={user} />, admin: <AdminPage user={user} /> };
+    const pages = { home: <HomePage setPage={go} user={user} />, notes: <NotesPage user={user} />, roommate: <RoommatePage user={user} />, mess: <MessMenuPage />, lostfound: <LostFoundPage user={user} />, events: <EventsPage user={user} />, admin: <AdminPage user={user} />, profile: <ProfilePage user={user} />, notices: <NoticeBoard user={user} />, timetable: <TimetablePage user={user} />, marketplace: <MarketplacePage user={user} /> };
     return (<div className="app"><Navbar page={page} setPage={go} user={user} onLogout={logout} theme={theme} toggleTheme={toggleTheme} /><main className="main-content" key={page}>{pages[page]}</main><CampusBot user={user} /></div>);
 }
