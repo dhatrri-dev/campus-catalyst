@@ -1,6 +1,6 @@
 # Campus Catalyst
 
-**Campus Catalyst** is a centralized platform designed to consolidate essential student services into a single, cohesive interface. Developed with a focus on modularity and user experience, the system addresses common campus friction points such as resource sharing, housing compatibility, and operational transparency.
+**Campus Catalyst** is a student project built to simplify and enhance campus life through a unified platform. The system addresses common campus friction points such as resource sharing, housing compatibility, and operational transparency.
 
 ---
 
@@ -10,7 +10,7 @@
 - **Styling & UX**: Vanilla CSS with a focus on Glassmorphism; Framer Motion for micro-interactions.
 - **Backend-as-a-Service**: [Supabase](https://supabase.com/)
   - **PostgreSQL**: Relational data storage for profiles, notes, and community requests.
-  - **Storage**: Cloud-sync for academic documents (PDFs/Images).
+  - **Storage**: Cloud sync for academic documents (PDFs/Images).
   - **Authentication**: JWT-based secure user sessions.
 - **State Management**: Atomic React Hooks for real-time UI synchronization.
 
@@ -81,4 +81,4 @@ A secure control panel (accessible via authorized credentials) for platform main
 
 ---
 
-<p align="center"><i>Final Project for Academic DBMS Review</i></p>
+<p align="center"><i>Building the future of campus connectivity</i></p>
