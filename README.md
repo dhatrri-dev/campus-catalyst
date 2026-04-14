@@ -1,84 +1,51 @@
 # Campus Catalyst
 
-**Campus Catalyst** is a student project built to simplify and enhance campus life through a unified platform. The system addresses common campus friction points such as resource sharing, housing compatibility, and operational transparency.
+A web application designed to help students organize their daily campus life. It centralizes utilities like academic note sharing, roommate matching, and schedule management into a single interface.
 
----
+## Description
+Campus Catalyst is a utility platform built for students. It provides tools to share study resources, find compatible roommates based on habits, and keep track of campus activities like mess menus and lost items.
 
-## 🏗️ Technical Architecture
+## Features
+- **Academic Notes Hub**: Upload and download study materials in PDF or image format with community ratings and comments.
+- **Roommate Matcher**: Find roommates by comparing lifestyle preferences like sleep cycles, noise tolerance, and cleanliness.
+- **Campus Marketplace**: A internal board for students to buy or sell items within the campus community.
+- **Lost & Found Tracker**: A real-time registry to report and recover lost belongings.
+- **Digital Timetable**: Create and manage weekly class schedules with a visual interface.
+- **Notice Board & Events**: Stay updated with campus-wide announcements and upcoming event RSVPs.
 
-- **Frontend**: React 19 + Vite (Single Page Application)
-- **Styling & UX**: Vanilla CSS with a focus on Glassmorphism; Framer Motion for micro-interactions.
-- **Backend-as-a-Service**: [Supabase](https://supabase.com/)
-  - **PostgreSQL**: Relational data storage for profiles, notes, and community requests.
-  - **Storage**: Cloud sync for academic documents (PDFs/Images).
-  - **Authentication**: JWT-based secure user sessions.
-- **State Management**: Atomic React Hooks for real-time UI synchronization.
+## Tech Stack
+- **Frontend**: React 19, Vite, CSS3
+- **Backend/Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
+- **Storage**: Supabase Storage (for notes and files)
 
----
-
-## 📦 Core Modules
-
-### 1. Academic Hub (Resource Sharing)
-A peer-to-peer ecosystem for academic material exchange.
-- **Cloud Document Storage**: Integrated with Supabase Storage for persistent file management.
-- **Peer Review System**: Quantitative (star-rating) and qualitative (threaded comments) feedback loops.
-- **Optimized Search**: Subject-code and metadata-based filtering for efficient discovery.
-
-### 2. Community Match (Housing Compatibility)
-A preference-weighted engine designed to improve roommate selection outcomes.
-- **Custom Profile Schema**: Captures lifestyle habits (sleep, noise, cleanliness).
-- **Matching Engine**: Logic-based filtering within strict gender-separated pools for hostel compliance.
-- **Connection Protocol**: Integrated request/acceptance workflow for secure student outreach.
-
-### 3. Campus Operations
-Streamlining daily university logistics through dedicated CRUD modules.
-- **Marketplace**: A secure, internal board for community trade.
-- **Lost & Found Tracker**: A centralized registry for reporting and recovering lost items.
-- **Notice Board & Events**: Live broadcast modules for official announcements and RSVP tracking.
-- **Timetable Tracker**: A personalized schedule manager with semester-specific persistence.
-
-### 4. Admin Moderation & Automation
-A secure control panel (accessible via authorized credentials) for platform maintenance.
-- **Content Moderation**: Ability to audit and prune community-uploaded files.
-- **Automation Pipeline**: Control toggles for scheduled campus tasks (e.g., fee reminders, report generation).
-- **Service Management**: Dynamic updating of mess menus and official notices.
-
----
-
-## 🚀 Development Setup
-
-### Prerequisites
-- Node.js (v18+)
-- Supabase project environment
-
-### Installation
-
-1. **Clone and Install**
+## How to Run
+1. **Clone the repository**:
    ```bash
    git clone https://github.com/dhatrri-dev/campus-catalyst.git
    cd campus-catalyst
+   ```
+2. **Install dependencies**:
+   ```bash
    npm install
    ```
-
-2. **Environment Configuration**
-   Store your Supabase credentials in a `.env` file:
+3. **Set up Environment Variables**:
+   Create a `.env` file in the root directory and add your Supabase credentials:
    ```env
-   VITE_SUPABASE_URL=your_project_url
-   VITE_SUPABASE_ANON_KEY=your_anon_key
+   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
    ```
-
-3. **Run Locally**
+4. **Run the development server**:
    ```bash
    npm run dev
    ```
+5. **Build for production**:
+   ```bash
+   npm run build
+   ```
 
----
+## Author
+- [Dhatrri](https://github.com/dhatrri-dev)
 
-## 📈 Future Scope
-- **Push Notifications**: Transitioning from polling to real-time socket-based alerts.
-- **File Preview**: Generating server-side thumbnails for PDF uploads.
-- **Analytics Dashboard**: Aggregated insights for campus admins on resource utilization.
-
----
-
-<p align="center"><i>Building the future of campus connectivity</i></p>
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
